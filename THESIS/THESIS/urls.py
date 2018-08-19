@@ -20,6 +20,7 @@ from django.conf.urls import url
 
 urlpatterns = [
     url(r'^$', views.home, name='home'),
+    #url(r'^process/$',views.process, name='process'),
     url(r'^process/$',views.process, name='process'),
     path('admin/', admin.site.urls),
     
