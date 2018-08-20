@@ -23,9 +23,13 @@ def process(request):
     myfile  = request.FILES["pcap_file"]
     print(myfile)
     
+    context={
+        myfile:'myfile'
+    }
+    
     #classpercent = SOM(myfile)
     
-    return HttpResponse('')
+    return render(request,'process.html',context)
 
 def normalized(csv):
 #NORMALIZE PART#

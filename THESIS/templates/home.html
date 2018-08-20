@@ -92,24 +92,25 @@
     </body>
 <script type = "text/javascript">
     
-    $(document).on('submit','#form_submit',function(e){
-                   e.preventDefault();
-                    
-                    $.ajax({
-                        type:'POST',
-                        url:'/process/',
-                        data:{
-                            pcap_file:$('#pcap_file').val
-                            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
-                        },
-                        success:function(){
-                            alert("okay")
-                        
-                        }
-                    });
-                   
-                   });
-    
+    $(function() {
+    $('#form_submit').submit(function upload(e) {
+        e.preventDefault();
+        var data = new FormData($('#form_submit').get(0));
+
+        $.ajax({
+            url: $(this).attr('action'),
+            type: $(this).attr('method'),
+            data: data,
+            cache: false,
+            processData: false,
+            contentType: false,
+            success: function(data) {
+                alert("okay");
+            }
+        });
+        return false;
+    });
+});
 </script>
     
 </html>
