@@ -33,7 +33,7 @@ def process(request):
     }
     
     classpercent = SOM(uploaded_file_url)
-    fs.delete(myfile.name)
+    fs.delete(filename)
     
     return render(request,'process.html',context)
 
@@ -76,6 +76,6 @@ def SOM(som):
         csv = sl.opencsv(temp)
         norm = sl.normalized(csv)
         hits = sl.som_hits(weights, norm)
-        name = (os.path.join(settings.BASE_DIR,"static/img/") + x + ".png")
+        name = (os.path.join(settings.BASE_DIR,"static/img/map/") + x + ".png")
         sl.hit_overlap(kmap,hits,count,img_directory)
         sl.disp(kmap,name,hits,label)
