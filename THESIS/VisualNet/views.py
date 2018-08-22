@@ -26,16 +26,28 @@ def process(request):
     filename = fs.save(myfile.name,myfile)
     uploaded_file_url = fs.url(filename)
     
-    print(myfile)
     
-    context={
-        myfile:'myfile'
-    }
     
     classpercent = SOM(uploaded_file_url)
     fs.delete(filename)
     
-    return render(request,'process.html',context)
+    
+    som_pic = os.listdir(os.path.join(settings.BASE_DIR,'static/img/map')) 
+    pie_pic = os.listdir(os.path.join(settings.BASE_DIR,'static/img/pie')) 
+    
+    sorted_som = natsort.natsorted(som_pic)
+    sorted_pie = natsort.natsorted(pie_pic)
+    
+    
+    print(sorted_som)
+    print(sorted_pie)
+    context={
+        'sorted_som':sorted_som,
+        'sorted_pie':sorted_pie,
+    }
+    
+    
+    return render(request.POST.getlist(context),'process.html',context)
 
 def normalized(csv):
 #NORMALIZE PART#
