@@ -63,7 +63,7 @@
         </div>
         <div class="row h-50 " style="">
             <div class="container rounded shadow-lg" style="z-index: 1;background-color: whitesmoke !important; height:413px !important;
-                                                            width:720px !important;display:none  " id="cont1" >
+                                                            width:720px !important;  " id="cont1" >
                 <div class="row h-25" id="top_row1">
                     <p class="text-center w-100"> Let's start by uploading your PCAP file!</p>
                 </div>
@@ -90,24 +90,7 @@
                 </div>
                 
             </div>
-             <div class="container rounded shadow-lg" style="z-index: 1;background-color: whitesmoke !important; height:560px !important;
-                                                            width:720px !important ;" id="cont2">
-                
-                 
-            <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:380px;overflow:hidden;">
-                
-                {% for item in sorted_som %}
-                <div>
-                    <img data-u="image" src="http:/localhost:8000/static/img/map/{{item}}" />
-                    <img data-u="thumb" src="https://via.placeholder.com/190x90" />
-                </div>
-                {% endfor %}
-
-            </div>
-                 
-                 
-                 
-             </div>
+             
         </div>
         <div class="row h-25 bg-transparent">
         
@@ -120,34 +103,5 @@
     </body>
     
 
-<script type = "text/javascript">
-    
-    $(function() {
-    $('#form_submit').submit(function upload(e) {
-        e.preventDefault();
-        var data = new FormData($('#form_submit').get(0));
-        $("#top_row1").hide();
-        $("#top_row2").hide();
-        $("#btm_row1").hide();
-        
-        $(".rows1").fadeIn();
-
-        $.ajax({
-            url: $(this).attr('action'),
-            type: $(this).attr('method'),
-            data: data,
-            cache: false,
-            processData: false,
-            contentType: false,
-            success: function(data) {
-                alert("okay");
-                $("#cont1").hide();
-                $("#cont2").show();
-            }
-        });
-        return false;
-    });
-});
-</script>
     
 </html>

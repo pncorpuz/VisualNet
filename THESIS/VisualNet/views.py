@@ -19,7 +19,7 @@ def home(request):
 def process(request):
     
     if "GET" == request.method:
-        return HtppResponce("error")
+        return HttpResponse("error")
 
     myfile  = request.FILES["pcap_file"]
     fs = FileSystemStorage()
@@ -47,7 +47,7 @@ def process(request):
     }
     
     
-    return render(request.POST.getlist(context),'process.html',context)
+    return render(request,'process.html',context)
 
 def normalized(csv):
 #NORMALIZE PART#
