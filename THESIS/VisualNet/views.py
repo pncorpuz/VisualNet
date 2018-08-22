@@ -52,6 +52,7 @@ def SOM(som):
     
     pcapname = som
     directory = os.path.join(settings.BASE_DIR,"static/chap/")
+    img_directory = os.path.join(settings.BASE_DIR,"static/img/")
     filename = "csv"
     somsize = 20
     ksize = 6
@@ -76,5 +77,5 @@ def SOM(som):
         norm = sl.normalized(csv)
         hits = sl.som_hits(weights, norm)
         name = (os.path.join(settings.BASE_DIR,"static/img/") + x + ".png")
-        sl.hit_overlap(kmap,hits,count)
+        sl.hit_overlap(kmap,hits,count,img_directory)
         sl.disp(kmap,name,hits,label)
