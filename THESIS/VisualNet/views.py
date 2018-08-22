@@ -44,6 +44,7 @@ def process(request):
     context={
         'sorted_som':sorted_som,
         'sorted_pie':sorted_pie,
+        'data':zip(sorted_som,sorted_pie),
     }
     
     
