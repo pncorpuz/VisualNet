@@ -2,12 +2,12 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.conf.urls import url
 import somlib as sl
+from sklearn.preprocessing import MinMaxScaler
 import numpy as np
 import parlib as pl
 import natsort
 import os
 from django.conf import settings
-from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
 
@@ -21,22 +21,13 @@ def process(request):
         return HtppResponce("error")
 
     myfile  = request.FILES["pcap_file"]
-    fs = FileSystemStorage()
-    filename = fs.save(myfile.name,myfile)
-    uploaded_file_url = fs.url(filename)
-    
-    print("YOHOOO")
-    print(uploaded_file_url)
-
-    files = os.listdir(os.path.join(settings.BASE_DIR,'static/img'))
-    files.sort
-    classpercent = SOM(uploaded_file_url)
-    fs.delete(filename)
+    print(myfile)
     
     context={
-        'files':files
-        
+        myfile:'myfile'
     }
+    
+    #classpercent = SOM(myfile)
     
     return render(request,'process.html',context)
 
@@ -53,31 +44,43 @@ def normalized(csv):
 
 def SOM(som):
     
-    pcapname = som
-    directory = os.path.join(settings.BASE_DIR,"static/chap/")
-    filename = "csv"
-    somsize = 20
-    ksize = 6
     
-    pl.csv5(directory+filename,pcapname)
-    temparr = []
-    for filename in os.listdir(directory):
-        if filename.endswith(".csv"):
-            temparr.append(filename)
+    testcap = som
+    testfile = os.path.join(settings.BASE_DIR,"static/npy/trys.npy")
+    testweights = os.path.join(settings.BASE_DIR,"static/npy/weights.npy")
+    testlegends = os.path.join(settings.BASE_DIR,"static/npy/yes.npy")
+
+    pl.csv5(os.path.join(settings.BASE_DIR,"static/chap/a"),testcap)
+    tmparr=[]
+
+    for filename in os.listdir(os.path.join(settings.BASE_DIR,"static/chap")):
+        if filename.endswith(".csv"): 
+            tmparr.append(filename)
+            continue
         else:
             continue
-    visual_list = natsort.natsorted(temparr)
-    kmap = np.load(os.path.join(settings.BASE_DIR,"static/npy/kmap.npy"))
-    weights = np.load(os.path.join(settings.BASE_DIR,"static/npy/weights.npy"))
+    tmparr.sort()
+    visual_list = natsort.natsorted(tmparr)
+    w = sl.load(testweights)
+    newarr = sl.load(testfile)
+    sl.dispcolor(newarr)
+    newss = sl.load(testlegends)
+    legend_red = newss[0]  
+    legend_blue = newss[1]
+    legend_violet = newss[2]
+    legend_yellow = newss[3]
+    legend_pink = newss[4]
+    legend_grey = newss[5]
+    
+    print (newss)
     for x in visual_list:
-        temp = directory+x
-        csv = sl.opencsv(temp)
-        norm = sl.normalized(csv)
-        hits = sl.som_hits(weights, norm)
-        #name = ("img/" + x + ".png")
-        name = (os.path.join(settings.BASE_DIR,"static/img/") + x + ".png")
-        sl.disp(kmap,name,hits)
-    
-    
-
-    
+        temp = (os.path.join(settings.BASE_DIR,"static/chap")+x)
+        tests = sl.opencsv(temp)
+        tests = normalized(tests)
+        print(tests)
+        hits = sl.som_hits(w, tests)
+        name = (os.path.join(settings.BASE_DIR,"static/img") + x +".png")
+        print(name)
+        sl.disp(newarr,name,hits)
+    print("success!")
+    return newss
