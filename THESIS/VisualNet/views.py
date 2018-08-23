@@ -6,7 +6,7 @@ from sklearn.preprocessing import MinMaxScaler
 import numpy as np
 import parlib as pl
 import natsort
-import os
+import os, shutil
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 
@@ -16,6 +16,19 @@ from django.core.files.storage import FileSystemStorage
 def home(request):
     return render(request,'home.html')
 
+
+def delete(folder):
+    
+    for the_file in os.listdir(folder):
+        file_path = os.path.join(folder, the_file)
+        try:
+            if os.path.isfile(file_path):
+                os.unlink(file_path)
+            #elif os.path.isdir(file_path): shutil.rmtree(file_path)
+        except Exception as e:
+            print(e)
+
+        
 def process(request):
     
     if "GET" == request.method:
@@ -26,7 +39,13 @@ def process(request):
     filename = fs.save(myfile.name,myfile)
     uploaded_file_url = fs.url(filename)
     
+    maps = os.path.join(settings.BASE_DIR,'static/img/map')
+    pies = os.path.join(settings.BASE_DIR,'static/img/pie')
+    chaps = os.path.join(settings.BASE_DIR,'static/chap')
     
+    delete(maps)
+    delete(pies)
+    delete(chaps)
     
     classpercent = SOM(uploaded_file_url)
     fs.delete(filename)
@@ -63,6 +82,7 @@ def normalized(csv):
 
 def SOM(som):
     
+    print("starting")
     pcapname = som
     directory = os.path.join(settings.BASE_DIR,"static/chap/")
     img_directory = os.path.join(settings.BASE_DIR,"static/img/")
