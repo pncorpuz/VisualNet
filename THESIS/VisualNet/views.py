@@ -79,8 +79,8 @@ def SOM(som):
             continue
     visual_list = natsort.natsorted(tmparr)
 
-    label = np.load(os.path.join(settings.BASE_DIR,"static/npy/label.npy")) 
-    kmap = np.load(os.path.join(settings.BASE_DIR,"static/npy/kmap.npy"))  
+    label = np.load(os.path.join(settings.BASE_DIR,"static/npy/labels.npy")) 
+    kmap = np.load(os.path.join(settings.BASE_DIR,"static/npy/map.npy"))  
     weights = np.load( os.path.join(settings.BASE_DIR,"static/npy/weights.npy"))   
     count = 0
     for x in visual_list:
