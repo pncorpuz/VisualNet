@@ -17,3 +17,7 @@ html,body{
         background-color: aquamarine !important;
     }
 }
+
+p{
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
