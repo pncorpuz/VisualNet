@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <title></title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
@@ -102,9 +103,9 @@
         }
         
         .pie_pic{
-            width:400px;
-            height: 400px;
-            
+            width:auto;
+            height: auto;
+            margin:10px;
         }
 
         .middle {
@@ -164,20 +165,20 @@
         .jssort101 .t {position:absolute;top:0;left:0;width:100%;height:100%;border:none;opacity:.6;}
         .jssort101 .pav .t, .jssort101 .p:hover .t{opacity:1;}
     </style>
-    <div id="jssor_1" style="position:relative;margin:0 auto;top:20px;left:0px;width:640px;height:510px;overflow:hidden;visibility:hidden;">
+    <div id="jssor_1" style="position:relative;margin:0 auto;top:20px;left:0px;width:640px;height:600px;overflow:hidden;visibility:hidden;">
         <!-- Loading Screen -->
         <div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:640px;height:480px;text-align:center;background-color:rgba(0,0,0,0.7);">
             <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="img/spin.svg" />
         </div>
-        <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:640px;height:380px;overflow:hidden;">
+        <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:640px;height:500px;overflow:hidden;">
             {% for s,p in data%}
             <div class="cont">
                 <div class="text">{{forloop.counter}}</div>
-                <img class="image" data-u="image" src="{% static 'img/map/'|add:s %}" />
+                <img class="image" data-u="image" src="{% static 'img/pie/'|add:p %}" />
                 <img data-u="thumb" src="{% static 'img/map/'|add:s %}" />
                   <div class="middle">
                     <!--div class="text">John Doe</div-->
-                    <img src="{% static 'img/pie/'|add:p %}"/>
+                    <img src="{% static 'img/map/'|add:s %}"/>
                   </div>
                 <!-- img data-u="thumb" src="img/031-s190x90.jpg" /-->
             </div>
@@ -213,13 +214,20 @@
             </svg>
         </div>
     </div>
-    <div style="position:relative;margin:0 auto;width:100% ;height: 510px;display: inline-block;background-color: black;margin-top: 50px;overflow: hidden;">
-        <img class="pie_pic" src="{% static 'img/0.png' %}">
-        <img class="pie_pic" src="{% static 'img/1.png' %}">
-        <img class="pie_pic" src="{% static 'img/2.png' %}">
-        <img class="pie_pic" src="{% static 'img/3.png' %}">
-        <img class="pie_pic" src="{% static 'img/4.png' %}">
-        <img class="pie_pic" src="{% static 'img/5.png' %}">
+    <div class="container-fluid">
+    <div class ="row " style="margin:0 auto;width:100% ;height: auto;display: inline-block;margin-top: 50px;overflow:hidden;left:500px">
+        <div class="com-lg-12 mx-auto center-block text-center">
+            <img class="pie_pic" src="{% static 'img/0.png' %}">
+            <img class="pie_pic" src="{% static 'img/1.png' %}">
+            <img class="pie_pic" src="{% static 'img/2.png' %}">
+            <img class="pie_pic" src="{% static 'img/3.png' %}">
+            <img class="pie_pic" src="{% static 'img/4.png' %}">
+            <img class="pie_pic" src="{% static 'img/5.png' %}">
+        
+        
+        </div>
+       
+    </div>
     </div>
     <script type="text/javascript">jssor_1_slider_init();</script>
     <!-- #endregion Jssor Slider End -->
