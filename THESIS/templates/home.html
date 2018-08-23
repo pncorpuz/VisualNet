@@ -8,6 +8,15 @@
         
     </HEAD>
     <style>
+        input[type=submit] {
+            background: url({% static 'icons/button.png' %}) !important;
+            border: 0 !important;
+            margin-left:10px; 
+            display: block;
+            height: 64px !important;
+            width: 64px !important;
+            
+        }
         .text{
             
             font-size:40px;
@@ -23,33 +32,32 @@
             font-weight: 100;
         }
         div p{
-            font-family: above-personal;
+            
             font-weight: 600;
-            font-size: 24px;
+            font-size: 40px;
             
         }
         
         #testbtn{
-            background-color: #2ecc71 !important;
+            background-color: transparent!important;
             border: 0;
             cursor: pointer;
             text-transform: uppercase;
             
         }
         
-        #testbtn:hover{
-            background: aquamarine !important;
-            }
+        
         
         .loader {
-            border: 16px solid #f3f3f3; /* Light grey */
-            border-top: 16px solid #3498db; /* Blue */
-            border-radius: 50%;
-            width: 120px;
-            height: 120px;
-            animation: spin 2s linear infinite;
-            
+          border: 16px solid #f3f3f3;
+          border-radius: 50%;
+          border-top: 16px solid #3498db;
+          width: 120px;
+          height: 120px;
+          -webkit-animation: spin 2s linear infinite; /* Safari */
+          animation: spin 2s linear infinite;
         }
+        
 
         @keyframes spin {
             0% { transform: rotate(0deg); }
@@ -68,47 +76,60 @@
         <div class="row h-50 " style="">
             <div class="container rounded shadow-lg" style="z-index: 1;background-color: whitesmoke !important; height:100% !important;
                                                             width:100% !important;  " id="cont1" >
-                <div class="row h-25" id="top_row1">
+                <div class="row h-25 d-flex align-items-end" id="top_row01" style="display:none !important;">
+                    <p class="text-center w-100 text">Please Wait while we process the data</p>
+                </div>
+                <div class="row h-25 d-flex align-items-end" id="top_row1">
                     <p class="text-center w-100 text"> Let's start by uploading your PCAP file!</p>
                 </div>
                 <div class="row h-25" id="top_row2">
                     <form action= "{% url 'process' %}" method="POST" enctype="multipart/form-data" class="w-100" id="form_submit" style="display:hidden">
                         {% csrf_token %}   
-                        <div class="col-sm-4 mx-auto">
-                        <input type="file" name="pcap_file" id="pcap_file" required="True" class="form-control-file  w-100">
+                        <div class="col-md-6 mx-auto d-flex flex-wrap " style="height:65px !important;">
+                        <input type="file" name="pcap_file" id="pcap_file" required="True" class="form-control-file w-75"/>
+                        <input type="submit" value=""  id="testbtn"/> 
+                        <!--button type="submit" id="testbtn" class="btn" style="margin-left:10px"><img src="{% static 'icons/button.png' %}" style="border:0px"/> </button-->
                         </div>
-                        </div>
-                <div class="row h-50" id="btm_row1">
-                    <div class="col-sm-3 mx-auto">
-                    <div class="align-self-center center-block">
-                        <input type="submit" value="testing" class="w-100" id="testbtn" data-toggle="modal" data-target="#exampleModal">    
-                    </div>
-                    
-                    </div>
-                    
                     </form>
+                        
+                        </div>
+                <div class="row h-50 align-self-center" id="btm_row1">
+                    <div class=" col-sm-4 mx-auto d-flex justify-content-center" >
+                    <div class="loader" id="load" style="display: none !important"></div>  
+                    </div>
+                    
+                   </div>
+                    
+                    
                 
                 </div>
-                <div class="row h-50 rows1" style="display:none">
-                </div>
                 
-                <div class="row h-50 rows1" style="display:none">
-                    <div class="loader col-lg-4 mx-auto text-center" id="load"></div>     
-                </div>
                 
             </div>
              
         </div>
-        <div class="row h-25 bg-transparent">
         
-        </div>
            
         
-    </div>
+    
     
         
     </body>
+<script type="text/javascript">
     
+    $(document).ready(function() {
+    $('#form_submit').submit(function (e) {
+       
+        
+        $('#load').fadeIn();
+        
+        
+       
+        // A little hack for old browsers if you are using jQuery 2
+    });
+});
+    
+</script>
 
     
 </html>
