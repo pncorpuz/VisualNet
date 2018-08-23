@@ -8,6 +8,10 @@
         
     </HEAD>
     <style>
+        .text{
+            
+            font-size:40px;
+        }
         .rows1{
             display:none;
         }
@@ -62,10 +66,10 @@
          
         </div>
         <div class="row h-50 " style="">
-            <div class="container rounded shadow-lg" style="z-index: 1;background-color: whitesmoke !important; height:413px !important;
-                                                            width:720px !important;  " id="cont1" >
+            <div class="container rounded shadow-lg" style="z-index: 1;background-color: whitesmoke !important; height:100% !important;
+                                                            width:100% !important;  " id="cont1" >
                 <div class="row h-25" id="top_row1">
-                    <p class="text-center w-100"> Let's start by uploading your PCAP file!</p>
+                    <p class="text-center w-100 text"> Let's start by uploading your PCAP file!</p>
                 </div>
                 <div class="row h-25" id="top_row2">
                     <form action= "{% url 'process' %}" method="POST" enctype="multipart/form-data" class="w-100" id="form_submit" style="display:hidden">
@@ -76,7 +80,10 @@
                         </div>
                 <div class="row h-50" id="btm_row1">
                     <div class="col-sm-3 mx-auto">
-                    <input type="submit" value="testing" class="w-100" id="testbtn" data-toggle="modal" data-target="#exampleModal">
+                    <div class="align-self-center center-block">
+                        <input type="submit" value="testing" class="w-100" id="testbtn" data-toggle="modal" data-target="#exampleModal">    
+                    </div>
+                    
                     </div>
                     
                     </form>

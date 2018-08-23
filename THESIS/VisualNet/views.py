@@ -28,7 +28,7 @@ def process(request):
     
     
     
-    classpercent = SOM(uploaded_file_url)
+    #classpercent = SOM(uploaded_file_url)
     fs.delete(filename)
     
     
