@@ -48,6 +48,7 @@ def process(request):
     delete(chaps)
     
    #classpercent = SOM(uploaded_file_url)
+    time,hits = SOM(uploaded_file_url)
     fs.delete(filename)
     
     
@@ -63,10 +64,13 @@ def process(request):
     context={
         'sorted_som':sorted_som,
         'sorted_pie':sorted_pie,
-        'data':zip(sorted_som,sorted_pie),
+        'data':zip(sorted_som,sorted_pie,time,hits),
+        'time':time,
+        'hits':hits,
     }
     
-    
+    print(time)
+    print(hits)
     return render(request,'process.html',context)
 
 def normalized(csv):
@@ -87,10 +91,10 @@ def SOM(som):
     directory = os.path.join(settings.BASE_DIR,"static/chap/")
     img_directory = os.path.join(settings.BASE_DIR,"static/img/")
     filename = "csv"
-    somsize = 20
+    somsize = 10
     ksize = 6
 
-    pl.csv5(directory+filename,pcapname)
+    timestamp = pl.csv5(directory+filename,pcapname)
     tmparr=[]
     for filename in os.listdir(directory):
         if filename.endswith(".csv"):
@@ -103,12 +107,18 @@ def SOM(som):
     kmap = np.load(os.path.join(settings.BASE_DIR,"static/npy/map.npy"))  
     weights = np.load( os.path.join(settings.BASE_DIR,"static/npy/weights.npy"))   
     count = 0
+    hitout = []
+    
     for x in visual_list:
-        count = count + 1
         temp = directory+x
+        count = count+1
         csv = sl.opencsv(temp)
         norm = sl.normalized(csv)
         hits = sl.som_hits(weights, norm)
         name = (os.path.join(settings.BASE_DIR,"static/img/map/") + x + ".png")
         sl.hit_overlap(kmap,hits,count,img_directory)
         sl.disp(kmap,name,hits,label)
+        hitout.append(sl.total_hit(kmap,hits))
+        
+    
+    return (timestamp,hitout)

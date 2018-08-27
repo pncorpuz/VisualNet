@@ -18,44 +18,53 @@
                         
                         <!-- wrapper for slides -->
                         <div class="container-fluid carousel-inner no padding">
-                        
+                            {% for s,p,t,h in data%}
+                             {% if forloop.counter0 == 0 %}
                             <div class="carousel-item  active">
+                             {% else %}
+                            <div class="carousel-item  ">
+                             {% endif %}
+                                
                                 <div class="col-xs-3 col-sm-3 col-md-3">
-                                    <img src="{% static 'img/pie/pieform1.png' %}">
+                                    <img src="{% static 'img/map/'|add:s %}">
                     
                                 </div>
                                  <div class="col-xs-3 col-sm-3 col-md-3">
-                                    <img src="{% static 'img/map/csv0.csv.png' %}">
+                                    <img src="{% static 'img/pie/'|add:p %}">
                     
                                 </div>
                                  <div class="col-xs-3 col-sm-3 col-md-3 align-middle">
                                    <table class="table table-bordered" style="top:15px">
                                     <thead>
                                      <tr>
-                                        <th>Color</th>
+                                        <th>Cluster</th>
                                         <th># of hits</th>
                                      </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>RED</td>
-                                            <td>50</td>
+                                            <td>stream/gaming/emailing</td>
+                                            <td>{{h.0}}</td>
                                         </tr> 
                                         <tr>
-                                            <td>RED</td>
-                                            <td>50</td>
+                                            <td>gaming/Instant messaging</td>
+                                            <td>{{h.1}}</td>
                                         </tr> 
                                         <tr>
-                                            <td>RED</td>
-                                            <td>50</td>
+                                            <td>Browsing</td>
+                                            <td>{{h.2}}</td>
                                         </tr> 
                                         <tr>
-                                            <td>RED</td>
-                                            <td>50</td>
+                                            <td>Instant messaging/Email</td>
+                                            <td>{{h.3}}</td>
                                         </tr> 
                                         <tr>
-                                            <td>RED</td>
-                                            <td>50</td>
+                                            <td>Browsing/Gaming</td>
+                                            <td>{{h.4}}</td>
+                                        </tr> 
+                                        <tr>
+                                            <td>Instant Messaging/Gaming</td>
+                                            <td>{{h.5}}</td>
                                         </tr> 
                                     </tbody>
                                 
@@ -66,53 +75,8 @@
                             
                             
                             </div>
-                            <div class="carousel-item">
-                                <div class="col-xs-3 col-sm-3 col-md-3">
-                                   <img src="{% static 'img/pie/pieform1.png' %}">
-                    
-                                </div>
-                                 <div class="col-xs-3 col-sm-3 col-md-3">
-                                    <img src="{% static 'img/map/csv0.csv.png' %}">
-                    
-                                </div>
-                                 <div class="col-xs-3 col-sm-3 col-md-3 align-middle">
-                                    <table class="table table-bordered">
-                                    <thead>
-                                     <tr>
-                                        <th>Color</th>
-                                        <th># of hits</th>
-                                     </tr>
-                                    </thead>
-                                    <tbdoy>
-                                        <tr>
-                                            <td>RED</td>
-                                            <td>50</td>
-                                        </tr> 
-                                        <tr>
-                                            <td>RED</td>
-                                            <td>50</td>
-                                        </tr> 
-                                        <tr>
-                                            <td>RED</td>
-                                            <td>50</td>
-                                        </tr> 
-                                        <tr>
-                                            <td>RED</td>
-                                            <td>50</td>
-                                        </tr> 
-                                        <tr>
-                                            <td>RED</td>
-                                            <td>50</td>
-                                        </tr> 
-                                    </tbdoy>
-                                
-                                
-                                </table>
-                    
-                                </div>
-                            
-                            
-                            </div>
+                            {% endfor %}
+
                         
                         </div>
                         <!-- end for wrapper for sliders -->
@@ -130,21 +94,14 @@
                         <!--navi -->
                         
                         <ul class="carousel-indicators list-inline" style="overflow-y:hidden">
+                            {% for hello in time %}
                             <li class="list-inline-item active">
-                                <a id="carousel-selector-0" class="selected" data-slide-to="0" data-target="#my-slider">
-                                    <span class="border rounded">firts 5mins</span>
+                                <a id="carousel-selector-{{forloop.counter0}}" class="selected" data-slide-to="{{forloop.counter0}}" data-target="#my-slider">
+                                    <span class="border rounded">{{hello}}</span>
                                 </a>
                             </li>
-                             <li class="list-inline-item active">
-                                <a id="carousel-selector-1" class="selected" data-slide-to="1" data-target="#my-slider">
-                                    <span class="border rounded">firts 5mins</span>
-                                </a>
-                            </li>
-                             <li class="list-inline-item active">
-                                <a id="carousel-selector-1" class="selected" data-slide-to="0" data-target="#my-slider">
-                                    <span class="border rounded">firts 5mins</span>
-                                </a>
-                            </li>
+                            {% endfor %}
+ 
                             
                         
                         </ul> 
@@ -156,6 +113,8 @@
                 </div>
             </div>
     </div>
+    </div>
+    
 
 
     <div class="container-fluid">
