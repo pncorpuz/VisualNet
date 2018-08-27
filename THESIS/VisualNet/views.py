@@ -47,7 +47,7 @@ def process(request):
     delete(pies)
     delete(chaps)
     
-    classpercent = SOM(uploaded_file_url)
+   #classpercent = SOM(uploaded_file_url)
     fs.delete(filename)
     
     
