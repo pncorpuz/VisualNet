@@ -97,7 +97,7 @@
                             {% for hello in time %}
                             <li class="list-inline-item active">
                                 <a id="carousel-selector-{{forloop.counter0}}" class="selected" data-slide-to="{{forloop.counter0}}" data-target="#my-slider">
-                                    <span class="border rounded">{{hello}}</span>
+                                    <p class="border rounded">Time at: <br> {{hello}}</p>
                                 </a>
                             </li>
                             {% endfor %}
